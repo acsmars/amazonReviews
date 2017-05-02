@@ -2,7 +2,7 @@
 
 This tool for analyzing large data sets was designed and used to search for bias in reviews from Amazon.com
 
-The data for this search was generously provided by Julian McAuley at the University of California at San Diego. See citation below and more information here: http://jmcauley.ucsd.edu/data/amazon/links.html
+The data for this analysis was generously provided by Julian McAuley at the University of California at San Diego. See citation below and more information here: http://jmcauley.ucsd.edu/data/amazon/links.html
 
 # Procedure
 
