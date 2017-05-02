@@ -6,17 +6,18 @@ import getAverageRating
 
 if __name__ == "__main__":
 
-	byUser = getAverageRating.genAverages("rawData/reviews_Electronics_5Big.json", groups = ["reviewerID"], pruneMin = 2)
+	byUser = getAverageRating.genAverages("rawData/reviews_Electronics_5Big.json", groups = ["reviewerID"], pruneMin = 5)
 
 	average = []
 	sd = []
 	voteCount = []
 
-	index = 5
-	subsetSelector = 5
+	index = 1
+	subsetSelector = 1 # Include every nth user
+	maxVotes = 2000 # Most votes allowed of a user
 
 	for i,x in byUser[0].items():
-		if index % subsetSelector == 0:
+		if index % subsetSelector == 0 and x.get("voteCount") < maxVotes:
 			average.append(x.get("average"))
 			sd.append(x.get("sd"))
 			voteCount.append(x.get("voteCount"))
@@ -29,8 +30,8 @@ if __name__ == "__main__":
 		mode='markers',
 		marker=dict(
 			size=12,
-			color=average,          # set color to an array/list of desired values
-			colorscale='Viridis',   # choose a colorscale
+			color=average,      # set color to an array/list of desired values
+			colorscale='Reds',   # choose a colorscale Reds or Viridis
 			opacity=0.8
 		)
 	)
@@ -47,4 +48,4 @@ if __name__ == "__main__":
 
 	fig = go.Figure(data=data, layout=layout)
 
-	plotly.plotly.plot(fig, filename='Small Average User P0 R5')
+	plotly.plotly.plot(fig, filename='Electronics Average Item P5 R1')
