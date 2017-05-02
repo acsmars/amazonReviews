@@ -29,23 +29,35 @@ def genAverageRatings(ratings):
 		sd = statistics.stdev(overallRatings)
 		averageRatings[key] = {
 			"average":avg,
-			"sd":sd
+			"sd":sd,
+			"voteCount":len(rating)
 		}
 		
 	return averageRatings
 
-def genPrunedAverages(fileName, groups = ["reviewerID","asin"], pruneMin = 5):
+def genPruned(fileName, groups = ["reviewerID","asin"], pruneMin = 5):
 	"""
 		Returns list of dictionaries
 		One dictionary for each grouping requested
 	"""
 	fields = copy.copy(groups)
 	fields.append("overall")
-	groupedPruned = [pruneSmallSets(x,pruneMin) for x in parseData.parseAndGroup(fileName,fields = fields, groupAttributes = groups)]
+	return [pruneSmallSets(x,pruneMin) for x in parseData.parseAndGroup(fileName,fields = fields, groupAttributes = groups)]
+
+def genAverages(fileName, groups = ["reviewerID","asin"], pruneMin = 5):
+	"""
+		Returns list of dictionaries
+		One dictionary for each grouping requested
+		Averaged with Standard Deviations
+	"""
+	groupedPruned = genPruned(fileName, groups = groups, pruneMin = pruneMin)
+
 	averagedGroups = [genAverageRatings(x) for x in groupedPruned]
 
 	return averagedGroups
 
 if __name__ == "__main__":
-	genPrunedAverages("rawData/small5Set.json", groups = ["reviewerID"])
+	genAverages("rawData/small5Set.json", groups = ["reviewerID"])
+
+
 
