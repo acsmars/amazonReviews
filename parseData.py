@@ -26,7 +26,7 @@ def parseJson(fileName, fields = [], prune = []):
 				print("Error on line {} of data file: {}".format(i,e))
 	return data
 
-def groupByReviewer(data):
+def groupByReviewer(data, removeID = True):
 	"""
 		Takes parsed data list and creates a table with keys by reviewerName 
 	"""
@@ -35,6 +35,8 @@ def groupByReviewer(data):
 		reviewer = review.get("reviewerID")
 		if not userTable.get(reviewer):
 			userTable[reviewer] = []
+		if removeID:
+			del review["reviewerID"]
 		userTable.get(reviewer).append(review)
 	return userTable
 
@@ -49,6 +51,6 @@ def parseAndGroup(fileName, fields = [], prune = []):
 
 if __name__ == "__main__":
 	fields = ["asin","reviewerName","overall"]
-	userReviews = parseAndGroup("small5Set.json",prune = ["reviewText"])
+	userReviews = parseAndGroup("rawData/small5Set.json",prune = ["reviewText"])
 	for key,user in userReviews.items():
 		print(user)
