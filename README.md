@@ -11,11 +11,17 @@ This program parses line deliniated JSON data into a list of dictionaries, then 
 # Some Graphs
 
 https://plot.ly/~acsmars/28/
+
 https://plot.ly/~acsmars/26/
+
 https://plot.ly/~acsmars/20/
+
 https://plot.ly/~acsmars/18/
+
 https://plot.ly/~acsmars/16/
+
 https://plot.ly/~acsmars/2/
+
 https://plot.ly/~acsmars/12/
 
 # Citations
