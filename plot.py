@@ -6,16 +6,21 @@ import getAverageRating
 
 if __name__ == "__main__":
 
-	byUser = getAverageRating.genAverages("rawData/reviews_Electronics_5Big.json", groups = ["reviewerID"], pruneMin = 5)
+	byUser = getAverageRating.genAverages("rawData/reviews_Electronics_5Big.json", groups = ["reviewerID"], pruneMin = 2)
 
 	average = []
 	sd = []
 	voteCount = []
 
+	index = 5
+	subsetSelector = 5
+
 	for i,x in byUser[0].items():
-		average.append(x.get("average"))
-		sd.append(x.get("sd"))
-		voteCount.append(x.get("voteCount"))
+		if index % subsetSelector == 0:
+			average.append(x.get("average"))
+			sd.append(x.get("sd"))
+			voteCount.append(x.get("voteCount"))
+		index += 1
 
 	trace1 = go.Scatter3d(
 		x=average,
@@ -42,4 +47,4 @@ if __name__ == "__main__":
 
 	fig = go.Figure(data=data, layout=layout)
 
-	plotly.plotly.plot(fig, filename='3d-scatter-colorscale')
+	plotly.plotly.plot(fig, filename='Small Average User P0 R5')
